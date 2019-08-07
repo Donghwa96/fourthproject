@@ -14,3 +14,10 @@ class CreatePostForm(forms.ModelForm):
             ),
             'post_contents': forms.CharField(widget=CKEditorUploadingWidget()),
         }
+
+
+class PostSearchForm(forms.Form):
+    search_word = forms.CharField(label='검색 단어')
+
+
+

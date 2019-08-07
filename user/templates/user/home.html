@@ -23,19 +23,18 @@
             </div>
             <div class="category">
                 {% if user.is_active %}
-                    <a href=""> <span class="glyphicon glyphicon-heart"></span> {{user.username}}</a>
+                    <a href=""> <span class="glyphicon glyphicon-heart"></span> {{user.username}}'s Home</a>
                     <a href="{% url 'logout' %}">로그아웃</a>
-                    <a href="">마이페이지</a>
-                     <a href="{% url 'board_index' %}">게시판</a>
-                    <a href="">모델</a>
-                    <a href="">작가</a>
+                    <a href="{% url 'board_index' %}">게시판</a>
+                    <a href="{% url 'model' %}">모델</a>
+                    <a href="{% url 'photo' %}">작가</a>
                     </div>
-                    {% else %}
-                        <a id="top" " href="{% url 'login' %}"> <span class="glyphicon glyphicon-user"></span> 로그인</a>
-                        <a href="{% url 'signup' %}">회원가입</a>
-                        <a href="{% url 'board_index' %}">게시판</a>
-                        <a href="">모델</a>
-                        <a href="">작가</a>
+                {% else %}
+                    <a id="top"  href="{% url 'login' %}"> <span class="glyphicon glyphicon-user"></span> 로그인</a>
+                    <a href="{% url 'signup' %}">회원가입</a>
+                    <a href="{% url 'board_index' %}">게시판</a>
+                    <a href="{% url 'model' %}">모델</a>
+                    <a href="{% url 'photo' %}">작가</a>
                 {% endif %}
             </div>
         </body>

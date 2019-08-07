@@ -13,8 +13,8 @@
 
     <h1>게시물 제목: {{ post.post_title }}</h1>
 
-    <p><strong>작성자:</strong>{{post.writer}}</p>
-    <p><strong>작성 날짜:</strong> {{ post.post_date }}</p>
+    <p><strong>작성자:</strong> {{post.writer}}</p>
+    <p><strong>작성 날짜:</strong> {{ post.post_date| date:'Y년  N d일 a f' }}</p>
 
     <div style="margin-left:20px;margin-top:20px">
       <h4>게시물 내용</h4>
@@ -48,7 +48,8 @@
     <h3>댓글 목록</h3>
     {% for comment in post.comments.all %}
         <div class="comment">
-            {{ comment.comment_date }}{% if user.email != comment.comment_writer %}
+            {{ comment.comment_date| date:'Y년  N d일 a f' }}
+            {% if user.email != comment.comment_writer %}
                 <a href="{% url 'comment_delete' post.pk comment.pk %}" onclick="return confirm('정말 이 댓글을 삭제하겠습니까?')">댓글 삭제</a>
             {% endif %}
             <br>

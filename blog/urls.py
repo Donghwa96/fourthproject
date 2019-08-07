@@ -10,4 +10,5 @@ urlpatterns = [
     path('post/<int:post_pk>/comment/write', views.comment_write, name='comment_write'),
     path('post/delete/<int:pk>', views.post_delete, name='post_delete'),
     path('post/<int:post_pk>/comment/delete/<int:pk>', views.comment_delete, name='comment_delete'),
+    path('search/', views.SearchFormView.as_view(), name='search'),
 ]
