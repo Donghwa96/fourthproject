@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
     path('model/', views.ModelsPageView.as_view(), name='model'),
     path('model/post/', views.CreateModelsView.as_view(), name='model_post'),
-    path('model/detail/<int:post_id>/', views.detail, name="model_detail"),
+    path('model/detail/<int:model_id>/', views.detail, name="model_detail"),
 
     path('model/filter/orient/', views.filter_orient, name="filter_orient"),
     path('model/filter/western/', views.filter_western, name="filter_western"),

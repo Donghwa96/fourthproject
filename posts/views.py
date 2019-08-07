@@ -23,18 +23,18 @@ class ModelsPageView(ListView):
 class CreateModelsView(CreateView) :
     model = Models
     form_class = ModelsForm
-    template_name = 'model/post.html'
+    template_name = 'model/model_post.html'
     success_url = reverse_lazy('model')
 
 
-def detail(request, models_id) :
-    post_detail = Models.objects.get(pk=models_id)
-    return render(request, 'model/detail.html', {'post_detail':post_detail})
+def detail(request, model_id):
+    post_detail = Models.objects.get(pk=model_id)
+    return render(request, 'model/model_detail.html', {'post_detail': post_detail})
 
 
 def filter_orient(request):
     post_orient = Models.objects.filter(category="동양풍")
-    return render(request, 'model/filter_orient.html', {'post_orient':post_orient,})
+    return render(request, 'model/filter_orient.html', {'post_orient': post_orient,})
 
 
 def filter_western(request):
