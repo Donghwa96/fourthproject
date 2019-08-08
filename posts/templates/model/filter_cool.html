@@ -1,0 +1,34 @@
+
+{% extends 'model/model_base.html' %}
+{% block content %}
+
+    {% for cool in cool_posts %}
+        <a href="{% url 'model_detail' cool.id %}"><img src="{{ cool.thumbnail.url }}" width="350"></a>
+      {{ user.username }}
+      {{ cool.title }}
+      {{ cool.text|slice:":10" }}
+    {% endfor %}
+
+<ul class="pagination">
+  {% if cool_posts.has_previous %}
+      <li><a href="?page={{ cool_posts.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+  {% endif %}
+  {% for i in cool_paginator.page_range %}
+      {% if cool_posts.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if cool_posts.has_next %}
+      <li><a href="?page={{ cool_posts.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+</ul>
+
+
+{% endblock content %}
+</body>

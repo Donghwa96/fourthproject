@@ -1,0 +1,39 @@
+<!-- temlaptes/home.html -->
+
+{% extends 'model/model_base.html' %}
+{% block content %}
+
+    {% for cute in cute_posts %}
+      <a href="{% url 'model_detail' cute.id %}"><img src="{{ cute.thumbnail.url }}" width="350"></a>
+      {{ user.username }}
+      {{ cute.title }}
+      {{ cute.text|slice:":10" }}
+    {% endfor %}
+
+<br>
+
+
+<ul class="pagination">
+  {% if cute_posts.has_previous %}
+      <li><a href="?page={{ cute_posts.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+  {% endif %}
+  {% for i in cute_paginator.page_range %}
+      {% if cute_posts.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if cute_posts.has_next %}
+      <li><a href="?page={{ cute_posts.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+</ul>
+
+
+{% endblock content %}
+
+</body>

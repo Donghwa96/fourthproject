@@ -130,7 +130,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'blog', 'static')
+    os.path.join(BASE_DIR, 'blog', 'user', 'posts', 'static')
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -148,7 +148,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'user@gmail.com'
-EMAIL_HOST_PASSWORD = 'password'
-SERVER_EMAIL = 'user@gmail.com'
-DEFAULT_FROM_MAIL = 'user'
+EMAIL_HOST_USER = 'ensk960405@gmail.com'
+EMAIL_HOST_PASSWORD = 'Wksmswnd93!'
+SERVER_EMAIL = 'ensk960405@gmail.com'
+DEFAULT_FROM_MAIL = 'ensk960405'

@@ -1,0 +1,36 @@
+<!-- temlaptes/home.html -->
+
+{% extends 'photo/photo_base.html' %}
+{% block content %}
+
+    {% for bnws in photo_bnw_posts %}
+      <a href="{% url 'photo_detail' bnws.id %}"><img src="{{ bnws.thumbnail.url }}" width="350"></a>
+    {{ user.username }}
+    {{ bnws.title }}
+    {{ bnws.text|slice:":10" }}
+    {% endfor %}
+
+<ul class="pagination">
+  {% if photo_bnw_posts.has_previous %}
+      <li><a href="?page={{ photo_bnw_posts.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+  {% endif %}
+  {% for i in photo_bnw_paginator.page_range %}
+      {% if photo_bnw_posts.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if photo_bnw_posts.has_next %}
+      <li><a href="?page={{ photo_bnw_postss.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+</ul>
+
+
+{% endblock content %}
+
+</body>

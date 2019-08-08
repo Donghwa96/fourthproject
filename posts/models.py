@@ -5,7 +5,6 @@ from imagekit.processors import ResizeToFill
 
 class Models(models.Model):
     title = models.CharField(max_length=20)
-
     text = models.TextField(default='', null=True, blank=True)
     image1 = models.ImageField(upload_to = 'images/')
     image2 = models.ImageField(upload_to = 'images/', default='', null=True, blank=True)
@@ -14,20 +13,15 @@ class Models(models.Model):
     image5 = models.ImageField(upload_to = 'images/', default='', null=True, blank=True)
     thumbnail = ImageSpecField(source='image1', processors=[ResizeToFill(120,80)], format='JPEG')
 
-    GENDER_CHOICES = (
-        ('여성', '여성'),
-        ('남성', '남성'),
-    )
-    gender = models.CharField(max_length=2, choices=GENDER_CHOICES, null=True)
 
     CATEGORY_CHOICES = (
-        ('동양풍', '동양풍'),
-        ('서양풍', '서양풍'),
-        ('고전', '고전'),
-        ('현대', '현대'),
+        ('큐티', '큐티'),
+        ('청량', '청량'),
+        ('흑백사진', '흑백사진'),
+        ('플러스모델', '플러스모델'),
     )
 
-    category = models.CharField(max_length=3, choices=CATEGORY_CHOICES, null=True)
+    category = models.CharField(max_length=5, choices=CATEGORY_CHOICES, null=True)
 
     def __str__(self):
         return self.title
@@ -43,20 +37,14 @@ class Photo(models.Model):
     image5 = models.ImageField(upload_to = 'images/', default='', null=True, blank=True)
     thumbnail = ImageSpecField(source='image1', processors=[ResizeToFill(120,80)], format='JPEG')
 
-    GENDER_CHOICES = (
-        ('여성', '여성'),
-        ('남성', '남성'),
-    )
-    gender = models.CharField(max_length=2, choices=GENDER_CHOICES, null=True)
-
     CATEGORY_CHOICES = (
-        ('동양풍', '동양풍'),
-        ('서양풍', '서양풍'),
-        ('고전', '고전'),
-        ('현대', '현대'),
+        ('큐티', '큐티'),
+        ('청량', '청량'),
+        ('흑백사진', '흑백사진'),
+        ('플러스모델', '플러스모델'),
     )
 
-    category = models.CharField(max_length=3, choices=CATEGORY_CHOICES, null=True)
+    category = models.CharField(max_length=5, choices=CATEGORY_CHOICES, null=True)
 
     def __str__(self):
         return self.title

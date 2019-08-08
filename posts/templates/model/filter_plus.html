@@ -1,0 +1,36 @@
+<!-- temlaptes/home.html -->
+
+{% extends 'model/model_base.html' %}
+{% block content %}
+
+    {% for plus in plus_posts %}
+      <a href="{% url 'model_detail' plus.id %}"><img src="{{ plus.thumbnail.url }}" width="350"></a>
+      {{ user.username }}
+      {{ plus.title }}
+      {{ plus.text|slice:":10" }}
+    {% endfor %}
+
+<ul class="pagination">
+  {% if plus_posts.has_previous %}
+      <li><a href="?page={{ plus_posts.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+  {% endif %}
+  {% for i in plus_paginator.page_range %}
+      {% if plus_posts.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if plus_posts.has_next %}
+      <li><a href="?page={{ plus_posts.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+</ul>
+
+
+{% endblock content %}
+
+</body>

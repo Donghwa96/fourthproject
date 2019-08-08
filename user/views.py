@@ -1,3 +1,4 @@
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, FormView
 from .forms import UserRegistrationForm, LoginForm, VerificationEmailForm
 from django.contrib.auth import get_user_model
@@ -7,6 +8,10 @@ from django.contrib import messages
 from django.contrib.auth.tokens import default_token_generator
 from django.http import HttpResponseRedirect
 from .mixins import VerifyEmailMixin
+from django.contrib.auth.decorators import login_required
+from .models import User
+from .forms import ProfileForm, UserForm
+from django.views import View
 
 
 class UserRegistrationView(VerifyEmailMixin, CreateView):
@@ -14,7 +19,7 @@ class UserRegistrationView(VerifyEmailMixin, CreateView):
     form_class = UserRegistrationForm  # 자동생성 폼에서 사용할 필드
     success_url = '/user/login/'
     verify_url = '/user/verify/'
-    template_name = 'user/join.html'
+    template_name = 'user/registration.html'
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -74,3 +79,57 @@ class UserLoginView(LoginView):
 
 class Index(TemplateView):
     template_name = 'user/home.html'
+
+
+@login_required
+def profile(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    photos = user.photo_set.filter(is_public=True)[:10]
+    context = {"profile_user": user, "photos": photos}
+    return render(request, 'user/user_profile.html', context)
+
+
+class ProfileUpdateView(View): # 간단한 View클래스를 상속 받았으므로 get함수와 post함수를 각각 만들어줘야한다.
+    # 프로필 편집에서 보여주기위한 get 메소드
+    def get(self, request):
+        user = get_object_or_404(User, pk=request.user.pk)  # 로그인중인 사용자 객체를 얻어옴
+        user_form = UserForm(initial={
+            'name': user.name,
+            'username': user.username,
+        })
+
+        if hasattr(user, 'profile'):  # user가 profile을 가지고 있으면 True, 없으면 False (회원가입을 한다고 profile을 가지고 있진 않으므로)
+            profile = user.profile
+            profile_form = ProfileForm(initial={
+                'profile_photo': profile.profile_photo,
+                'weight': profile.weight,
+                'height': profile.height,
+            })
+        else:
+            profile_form = ProfileForm()
+
+        return render(request, 'user/user_profileupdate.html', {"user_form": user_form, "profile_form": profile_form})
+
+    # 프로필 편집에서 실제 수정(저장) 버튼을 눌렀을 때 넘겨받은 데이터를 저장하는 post 메소드
+    def post(self, request):
+        u = User.objects.get(id=request.user.pk)        # 로그인중인 사용자 객체를 얻어옴
+        user_form = UserForm(request.POST, instance=u)  # 기존의 것의 업데이트하는 것 이므로 기존의 인스턴스를 넘겨줘야한다. 기존의 것을 가져와 수정하는 것
+
+        # User 폼
+        if user_form.is_valid():
+            user_form.save()
+
+        if hasattr(u, 'profile'):
+            profile = u.profile
+            profile_form = ProfileForm(request.POST, request.FILES, instance=profile) # 기존의 것 가져와 수정하는 것
+        else:
+            profile_form = ProfileForm(request.POST, request.FILES) # 새로 만드는 것
+
+        # Profile 폼
+        if profile_form.is_valid():
+            profile = profile_form.save(commit=False) # 기존의 것을 가져와 수정하는 경우가 아닌 새로 만든 경우 user를 지정해줘야 하므로
+            profile.user = u
+            profile.save()
+
+        return redirect('profile', pk=request.user.pk) # 수정된 화면 보여주기
+

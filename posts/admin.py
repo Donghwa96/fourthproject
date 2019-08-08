@@ -5,11 +5,11 @@ from .models import Models, Photo
 
 
 class ModelAdmin(admin.ModelAdmin):
-     list_filter = ('gender', 'category')
+     list_filter = ('category',)
 
 
 class PhotoAdmin(admin.ModelAdmin):
-     list_filter = ('gender', 'category')
+     list_filter = ('category',)
 
 admin.site.register(Models, ModelAdmin)
 admin.site.register(Photo, PhotoAdmin)

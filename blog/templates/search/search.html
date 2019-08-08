@@ -1,29 +1,36 @@
-{% extends 'blog/base.html' %}
-
-{% block content %}
-
-    <div id="content">
-        <h1>게시물 검색</h1>
-
-        <form method="post">
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/search.css' %}">
+    </head>
+    <body>
+        <a href="{% url 'index' %}">
+            <img class="logo" src="../../static/image/logo.png" alt="">
+        </a>
+        <a class="title" href="{% url 'board_index' %}">
+            <p>matching</p>
+        </a>
+        <form class="form" method="post">
             {% csrf_token %}
             {{ form.as_table }}
-            <input type="submit" value="검색">
+            <input class="button" type="submit" value="search">
         </form>
-
-        <br><br>
-
         {% if object_list %}
-            {% for post in object_list %}
-                <h2><a href="{{ post.get_absolute_url }}">{{ post.id }}.&nbsp;{{ post.post_title }}(작성자:{{ post.writer }})</a></h2>
-                {{ post.post_date| date:'Y년  N d일 a f' }}
-                <br><br>
-                <p>{{ post.post_contents|safe }}</p>
-                <hr>
-            {% endfor %}
-        {% elif search_term %}
-            <b><i>검색한 '{{ search_term }}'결과를 찾지 못했습니다. </i></b>
+            <div class="info">
+                {% for post in object_list %}
+                    <a class="board_title" href="{{ post.get_absolute_url }}">{{ post.post_title }}</a>
+                    <br><br>
+                    {{ post.writer }}
+                    <br>
+                    {{ post.post_date| date:'Y년  N d일 a f' }}
+                    <br><br>
+                    <p>{{ post.post_contents|safe }}</p>
+                {% endfor %}
+                {% elif search_term %}
+                    <b><i class="error_m">검색한 '{{ search_term }}'결과를 찾지 못했습니다. </i></b>
+            </div>
         {% endif %}
-    </div>
-
-{% endblock %}
+    </body>
+</html>

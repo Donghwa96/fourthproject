@@ -12,7 +12,7 @@ class CreatePostForm(forms.ModelForm):
             'post_title': forms.TextInput(
                 attrs={'class': 'form-control', 'style': 'width:100%', 'placeholder': '제목을 입력하세요.'}
             ),
-            'post_contents': forms.CharField(widget=CKEditorUploadingWidget()),
+            'post_contents': forms.CharField(widget=CKEditorUploadingWidget(attrs={'placeholder': '만날 장소, 수고비, 카톡아이디는 필수입니다!'})),
         }
 
 

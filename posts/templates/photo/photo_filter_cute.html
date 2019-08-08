@@ -1,0 +1,34 @@
+
+{% extends 'photo/photo_base.html' %}
+{% block content %}
+
+    {% for cutes in photo_cute_posts %}
+      <a href="{% url 'photo_detail' cutes.id %}"><img src="{{ cutes.thumbnail.url }}" width="350"></a>
+      {{ user.username }}
+      {{ cutes.title }}
+      {{ cutes.text|slice:":10" }}
+    {% endfor %}
+
+<ul class="pagination">
+  {% if photo_cute_posts.has_previous %}
+      <li><a href="?page={{ photo_cute_posts.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+  {% endif %}
+  {% for i in photo_cute_paginator.page_range %}
+      {% if photo_cute_posts.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if photo_cute_posts.has_next %}
+      <li><a href="?page={{ photo_cute_postss.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+</ul>
+
+{% endblock content %}
+
+</body>
