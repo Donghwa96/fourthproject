@@ -15,7 +15,9 @@
     <a href="{% url 'filter_modern' %}"><button> 현대 </button></a>
     
     <br>
-    <a href="{% url 'model_post' %}"><button>Upload Image</button></a>
+    {% if user.is_model %}
+        <a href="{% url 'model_post' %}"><button>Upload Image</button></a>
+    {% endif %}
     <br>
     <br>
     <ul>

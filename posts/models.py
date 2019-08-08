@@ -5,6 +5,7 @@ from imagekit.processors import ResizeToFill
 
 class Models(models.Model):
     title = models.CharField(max_length=20)
+
     text = models.TextField(default='', null=True, blank=True)
     image1 = models.ImageField(upload_to = 'images/')
     image2 = models.ImageField(upload_to = 'images/', default='', null=True, blank=True)

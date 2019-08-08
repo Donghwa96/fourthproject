@@ -26,7 +26,7 @@
                 {% for post in post_list %}
                     <tr>
                         <td>{{ post.id }}</td>
-                        <td><a href="{{ post.get_absolute_url }}">{{ post.post_title|truncatewords:5 }} </a>   ( {{post.comments.count}} )</td>
+                        <td><a href="{{ post.get_absolute_url }}">{{ post.post_title|truncatewords:"6" }}</a>   ( {{post.comments.count}} )</td>
                         <td>{{ post.writer}}</td>
                         <td>{{ post.post_date }}</td>
                         <td>{{ post.post_hit }}</td>
