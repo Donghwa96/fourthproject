@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import User
+from .models import User, Profile
 
 
 @admin.register(User)
@@ -21,3 +21,5 @@ class UserAdmin(admin.ModelAdmin):
     joined_at.short_description = '가입일'
     last_login_at.admin_order_field = 'last_login_at'
     last_login_at.short_description = '최근로그인'
+
+admin.site.register(Profile)

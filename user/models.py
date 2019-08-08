@@ -5,6 +5,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.mail import send_mail
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -57,4 +58,10 @@ class UsersManager(BaseUserManager):
 
          return self._create_user(email, password, **extra_fields)
 
-# Create your models here.
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete= models.CASCADE)
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+
+    def __str__(self):
+        return f'{self.user.username} Profile'

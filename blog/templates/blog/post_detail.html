@@ -49,11 +49,11 @@
     {% for comment in post.comments.all %}
         <div class="comment">
             {{ comment.comment_date| date:'Y년  N d일 a f' }}
-            {% if user.email != comment.comment_writer %}
+            {% if user.username == comment.comment_writer.username %}
                 <a href="{% url 'comment_delete' post.pk comment.pk %}" onclick="return confirm('정말 이 댓글을 삭제하겠습니까?')">댓글 삭제</a>
             {% endif %}
             <br>
-            <strong>{{ comment.comment_writer }}</strong>
+            <strong>{{ comment.comment_writer.username }}</strong>
             <p>{{ comment.comment_contents }}</p>
         </div>
     {% empty %}
