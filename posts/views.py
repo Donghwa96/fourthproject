@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView  # new
 from django.urls import reverse_lazy  # new
-
+from django.contrib.auth.decorators import login_required
 from .forms import ModelsForm, PhotoForm
 from .models import Models, Photo
+
 
 from django.core.paginator import Paginator
 

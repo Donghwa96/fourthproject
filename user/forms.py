@@ -1,16 +1,16 @@
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import get_user_model
 from django import forms
-from django.forms import EmailField
+from django.forms import EmailField, ChoiceField
 from .validators import RegisteredEmailValidator
-from .models import User
-from .models import Profile
+from .models import User, Profile
+
 
 class UserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = get_user_model()
-        fields = ('email', 'name', 'username', 'role', 'gender')
+        fields = ('email', 'name', 'username', 'is_model', 'is_photographer', 'is_men', 'is_women')
 
 
 class LoginForm(AuthenticationForm):

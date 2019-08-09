@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.urls import reverse_lazy
 
+
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(verbose_name=_('email address'), unique=True, blank=False)
     name = models.CharField('이름', max_length=30, blank=True)
@@ -15,22 +16,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField('스태프 권한', default=False)
     is_active = models.BooleanField('사용중', default=True)
     date_joined = models.DateTimeField('가입일', default=timezone.now)
-    ROLE_MODEL = '모델'
-    ROLE_PHOTOGRAPHER = '사진작가'
-    ROLE_PEOPLE = '일반인'
-    CHOICES_PHOTOGRAPHER = (
-        (ROLE_MODEL, '모델'),
-        (ROLE_PHOTOGRAPHER, '사진작가'),
-        (ROLE_PEOPLE, '일반인'),
-    )
-    role = models.CharField('역할', max_length=4, choices=CHOICES_PHOTOGRAPHER, null=True)
-    GENDER_MALE = '남성'
-    GENDER_FEMALE = '여성'
-    CHOICES_GENDER = (
-        (GENDER_MALE, '남성'),
-        (GENDER_FEMALE, '여성'),
-    )
-    gender = models.CharField('성별', max_length=2, choices=CHOICES_GENDER, null=True)
+    is_model = models.BooleanField('모델', default=False)
+    is_photographer = models.BooleanField('사진작가', default=False)
+    is_men = models.BooleanField('남성', default=False)
+    is_women = models.BooleanField('여성', default=False)
+
     objects = UserManager()
 
     USERNAME_FIELD = 'email'  # email을 사용자의 식별자로 설정, user 모델에서 필드의 이름을 설명하는 문자열이다. 유니크 식별자로 사용됨.
@@ -44,10 +34,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def email_user(self, subject, message, from_email=None, **kwargs):  # 이메일 발송 메소드
         send_mail(subject, message, from_email, [self.email], **kwargs)
-
-    def get_absolute_url(self):
-        return reverse_lazy('profile', args=[str(self.user_id)])
-
 
 
 class UsersManager(BaseUserManager):
@@ -85,8 +71,6 @@ class Profile(models.Model):
     height = models.CharField('키', max_length=10, blank=True)
     weight = models.CharField('몸무게', max_length=10, blank=True)
 
-    def get_absolute_url(self):
-        return reverse_lazy('profile', args=[str(self.user_id)])
 
 
 def user_path(instance, filename): # instance는 Photo 클래스의 객체, filename은 업로드할 파일의 파일이름

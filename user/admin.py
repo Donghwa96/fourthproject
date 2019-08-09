@@ -5,7 +5,7 @@ from .models import User, Profile
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'email', 'name','username', 'role', 'gender', 'joined_at', 'last_login_at', 'is_superuser', 'is_active')
+    list_display = ('id', 'email', 'name','username', 'is_men','is_women', 'joined_at', 'last_login_at', 'is_superuser', 'is_active')
     list_display_links = ('id', 'email', 'name')
     exclude = ('password',)                           # 사용자 상세 정보에서 비밀번호 필드를 노출하지 않음
 

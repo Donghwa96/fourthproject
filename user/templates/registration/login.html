@@ -10,7 +10,7 @@
         </head>
         <body>
             <a href="{% url 'index' %}">
-                <img class="logo" src="../../static/image/logo.png" alt="">
+                <img class="logo" src="{% static 'image/logo.png' %}" alt="">
             </a>
             <img class="yellow" src="{% static 'image/yellow2.png' %}" alt="yellow2">
             <form class="form" action="." method="post">
@@ -33,5 +33,12 @@
                 <a href="{% url 'password_reset' %}">□ 비밀번호 찾기</a>
                 <a href="{% url 'resend' %}">□ 인증이메일 재발송</a>
             </div>
+        {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
         </body>
 </html>

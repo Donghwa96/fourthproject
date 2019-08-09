@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Lacquer&display=swap');
+@font-face { font-family: 'KOMACON'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/KOMACON.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+body {
+    font-family: 'KOMACON';
+}
 
 .logo {
     z-index: 1;
@@ -53,4 +58,15 @@
 .kind > a {
     color: rgb(253,79,91);
     text-decoration: none;
+}
+
+.resend_done {
+    position: absolute;
+    top: 30%;
+    left: 5%;
+}
+
+.resend_done > p {
+    color: rgb(77,139,124);
+    font-size: 1.3em;
 }

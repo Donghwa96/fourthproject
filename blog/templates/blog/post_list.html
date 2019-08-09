@@ -11,7 +11,8 @@
     </ul>
     {% endif %}
 
-    <table class="table">
+    <center>
+        <table class="table">
         <thead>
             <tr>
                 <th>no</th>
@@ -33,7 +34,7 @@
                 {% for post in post_list %}
                     <tr>
                         <td id="id">{{ post.id }}</td>
-                        <td id="board_title"><a href="{{ post.get_absolute_url }}">{{ post.post_title|truncatechars:"25"}}</a></td>
+                        <td id="board_title"><a href="{{ post.get_absolute_url }}">{{ post.post_title|truncatechars:"25" }}</a></td>
                         <td id="user">{{ post.writer}}</td>
                         <td id="date">{{ post.post_date }}</td>
                         <td id="hit">{{ post.post_hit }}</td>
@@ -44,6 +45,7 @@
             {% endif %}
         </tbody>
     </table>
+    </center>
 
 {% endblock %}
 
