@@ -150,5 +150,5 @@ EMAIL_PORT = 587
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'user@gmail.com'
 EMAIL_HOST_PASSWORD = 'password'
-SERVER_EMAIL = 'user@gmail.com'
-DEFAULT_FROM_MAIL = 'user'
+SERVER_EMAIL = 'ensk960405@gmail.com'
+DEFAULT_FROM_MAIL = 'ensk960405'

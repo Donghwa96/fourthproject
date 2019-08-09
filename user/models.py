@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.core.mail import send_mail
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
-
+from django.urls import reverse_lazy
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(verbose_name=_('email address'), unique=True, blank=False)
@@ -45,6 +45,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):  # 이메일 발송 메소드
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
+    def get_absolute_url(self):
+        return reverse_lazy('profile', args=[str(self.user_id)])
+
+
 
 class UsersManager(BaseUserManager):
     use_in_migrations = True
@@ -80,6 +84,10 @@ class Profile(models.Model):
     profile_photo = models.ImageField(blank=True)
     height = models.CharField('키', max_length=10, blank=True)
     weight = models.CharField('몸무게', max_length=10, blank=True)
+
+    def get_absolute_url(self):
+        return reverse_lazy('profile', args=[str(self.user_id)])
+
 
 def user_path(instance, filename): # instance는 Photo 클래스의 객체, filename은 업로드할 파일의 파일이름
     from random import choice   # string으로 나온 결과에서 하나의 문자열만 뽑아냄
