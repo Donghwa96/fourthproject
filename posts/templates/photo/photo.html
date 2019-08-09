@@ -1,36 +1,32 @@
 
 {% extends 'photo/photo_base.html' %}
 {% block content %}
-    <ul>
-        {% for photo in object_list %}
-            <a href="{% url 'photo_detail' photo.id %}"><img src="{{ photo.thumbnail.url }}" width="350" alt = "{{ photo.title }}"></a>
-            {{ user.username }}
-            {{ photo.title }}
-            {{ photo.text|slice:":10" }}
-        {% endfor %}
-    </ul>
 
-    {% if is_paginated %}
-  <ul class="pagination">
-    {% if page_obj.has_previous %}
-      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
-    {% endif %}
-    {% for i in paginator.page_range %}
-      {% if page_obj.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-      {% else %}
-        <li><a href="?page={{ i }}">{{ i }}</a></li>
-      {% endif %}
-    {% endfor %}
-    {% if page_obj.has_next %}
-      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&raquo;</span></li>
-    {% endif %}
-  </ul>
-{% endif %}
+    <div class="array">
+                {% for photo in object_list %}
+                        <div class="card">
+                            <div class="box-1">
+                                <img src="{{ photo.thumbnail.url }}" width="200" height="250" alt = "{{ photo.title }}">
+                            </div>
+                            <div class="box-2">
+                                <h4>{{ photo.title }}(id : {{ user.username }})</h4>
+                                <a href="{% url 'photo_detail' photo.id %}"><p>{{ photo.text|slice:":15" }}...more</p></a>
+                            </div>
+                        </div>
+                {% endfor %}
+            </div>
+
+<div class="paginator">
+          {% if is_paginated %}
+                    {% if page_obj.has_previous %}
+                        <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">back</a>
+                    {% endif %}
+                    <a href="#">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }} </a>
+                    {% if page_obj.has_next %}
+                        <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+                    {% endif %}
+                {% endif %}
+        </div>
 
 {% endblock content %}
 

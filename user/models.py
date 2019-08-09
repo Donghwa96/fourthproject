@@ -23,14 +23,14 @@ class User(AbstractBaseUser, PermissionsMixin):
         (ROLE_PHOTOGRAPHER, '사진작가'),
         (ROLE_PEOPLE, '일반인'),
     )
-    role = models.CharField(max_length=4, choices=CHOICES_PHOTOGRAPHER, null=True)
+    role = models.CharField('역할', max_length=4, choices=CHOICES_PHOTOGRAPHER, null=True)
     GENDER_MALE = '남성'
     GENDER_FEMALE = '여성'
     CHOICES_GENDER = (
         (GENDER_MALE, '남성'),
         (GENDER_FEMALE, '여성'),
     )
-    gender = models.CharField(max_length=2, choices=CHOICES_GENDER, null=True)
+    gender = models.CharField('성별', max_length=2, choices=CHOICES_GENDER, null=True)
     objects = UserManager()
 
     USERNAME_FIELD = 'email'  # email을 사용자의 식별자로 설정, user 모델에서 필드의 이름을 설명하는 문자열이다. 유니크 식별자로 사용됨.

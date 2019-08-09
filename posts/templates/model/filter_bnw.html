@@ -3,34 +3,31 @@
 {% extends 'model/model_base.html' %}
 {% block content %}
 
-    {% for bnw in bnw_posts %}
-      <a href="{% url 'model_detail' bnw.id %}"><img src="{{ bnw.thumbnail.url }}" width="350"></a>
-      {{ user.username }}
-      {{ bnw.title }}
-      {{ bnw.text|slice:":10" }}
-    {% endfor %}
 
-<ul class="pagination">
-  {% if bnw_posts.has_previous %}
-      <li><a href="?page={{ bnw_posts.previous_page_number }}">&laquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
-  {% endif %}
-  {% for i in bnw_paginator.page_range %}
-      {% if bnw_posts.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-      {% else %}
-        <li><a href="?page={{ i }}">{{ i }}</a></li>
-      {% endif %}
-    {% endfor %}
-    {% if bnw_posts.has_next %}
-      <li><a href="?page={{ bnw_posts.next_page_number }}">&raquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&raquo;</span></li>
-    {% endif %}
-</ul>
+        <div class="array">
+                {% for bnw in bnw_posts %}
+                        <div class="card">
+                            <div class="box-1">
+                                <img src="{{ bnw.thumbnail.url }}" width="200" height="250">
+                            </div>
+                            <div class="box-2">
+                                <h4>{{ bnw.title }}(id : {{ user.username }})</h4>
+                                <a href="{% url 'model_detail' bnw.id %}"><p>{{ bnw.text|slice:":15" }}...more</p></a>
+                            </div>
+                        </div>
+                {% endfor %}
+        </div>
 
+<div class="paginator">
+          {% if is_paginated %}
+                    {% if page_obj.has_previous %}
+                        <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">back</a>
+                    {% endif %}
+                    <a href="#">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }} </a>
+                    {% if page_obj.has_next %}
+                        <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+                    {% endif %}
+                {% endif %}
+        </div>
 
 {% endblock content %}
-
-</body>
