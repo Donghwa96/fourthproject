@@ -29,6 +29,11 @@ body {
 .title > a {
     position: relative;
     text-decoration: none;
+    padding-left: 45%;
+    font-family: 'Lacquer', sans-serif;
+    color: rgb(77,139,124);
+    font-size: 2em;
+    text-decoration: none;
 }
 
 #title_p {

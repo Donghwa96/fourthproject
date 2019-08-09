@@ -9,7 +9,7 @@
         <img class="logo" src="{% static 'image/logo.png' %}" alt="logo">
     </a>
     <div class="title">
-        <p><a href="{% url 'photo' %}">photographer</a></p>
+        <a href="{% url 'photo' %}">photographer</a>
     </div>
     <div class="category">
         {% if user.is_authenticated %}

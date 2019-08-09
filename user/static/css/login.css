@@ -70,3 +70,7 @@ body {
     color: rgb(77,139,124);
     font-size: 1.3em;
 }
+.messages > li {
+    color: red;
+    font-size: 50px;
+}

@@ -7,6 +7,14 @@
             <title>로그인</title>
             {% load staticfiles %}
             <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}" />
+            <style>
+                @font-face { font-family: 'KOMACON'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/KOMACON.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+               .messages {
+                    font-family: KOMACON;
+                    color: rgb(77,139,124);
+                }
+            </style>
         </head>
         <body>
             <a href="{% url 'index' %}">
@@ -36,9 +44,9 @@
         {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    <strong>{{ message }}</strong>
     {% endfor %}
 </ul>
-{% endif %}
+    {% endif %}
         </body>
 </html>
