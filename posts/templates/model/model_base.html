@@ -32,7 +32,7 @@
                 <a href="{% url 'filter_plus' %}"><button class="plus">플러스모델</button></a>
             </div>
             <div class="inline">
-                {% if user.is_model == True %}
+                {% if user.role == '모델' %}
                     <a href="{% url 'model_post' %}"><button class="upload_post">upload</button></a>
                 {% endif %}
             </div>

@@ -10,7 +10,7 @@ class UserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = get_user_model()
-        fields = ('email', 'name', 'username', 'is_model', 'is_photographer', 'is_men', 'is_women')
+        fields = ('email', 'name', 'username', 'gender', 'role')
 
 
 class LoginForm(AuthenticationForm):

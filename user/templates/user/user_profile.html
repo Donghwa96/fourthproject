@@ -54,14 +54,14 @@
 <div class="green2-zero">
 
 <div class="green2">
-        <h3>{% if profile_user.is_men == True %}
+        <h3>{% if profile_user.gender == '남성' %}
             남성
             {% else %}
             여성
             {% endif %}<br> <br>
-        {% if profile_user.is_model == True %}
+        {% if profile_user.role == '모델' %}
             모델
-        {% elif profile_user.is_photographer == True %}
+        {% elif profile_user.role == '사진작가' %}
         사진작가
         {% else %}
         일반인

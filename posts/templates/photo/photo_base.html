@@ -32,7 +32,7 @@
                 <a href="{% url 'photo_filter_plus' %}"><button class="plus">플러스모델</button></a>
             </div>
             <div class="inline">
-                {% if user.is_photographer == True %}
+                {% if user.role == '사진작가' %}
                 <a href="{% url 'photo_post' %}"><button class="upload_post">upload</button></a>
                 {% endif %}
             </div>

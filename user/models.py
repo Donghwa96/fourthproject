@@ -16,11 +16,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField('스태프 권한', default=False)
     is_active = models.BooleanField('사용중', default=True)
     date_joined = models.DateTimeField('가입일', default=timezone.now)
-    is_model = models.BooleanField('모델', default=False)
-    is_photographer = models.BooleanField('사진작가', default=False)
-    is_men = models.BooleanField('남성', default=False)
-    is_women = models.BooleanField('여성', default=False)
-
+    ROLE_CHOICES = (
+        ('모델', '모델'),
+        ('사진작가', '사진작가'),
+        ('일반인', '일반인'),
+    )
+    GENDER_CHOICES = (
+        ('남성', '남성'),
+        ('여성', '여성'),
+    )
+    role = models.CharField('역할', max_length=4, choices=ROLE_CHOICES, default='')
+    gender = models.CharField('성별', max_length=3, choices=GENDER_CHOICES, default='')
     objects = UserManager()
 
     USERNAME_FIELD = 'email'  # email을 사용자의 식별자로 설정, user 모델에서 필드의 이름을 설명하는 문자열이다. 유니크 식별자로 사용됨.
