@@ -7,7 +7,9 @@
                 {% for plus in plus_posts %}
                         <div class="card">
                             <div class="box-1">
-                                <img src="{{ plus.image1.url  }}" width="200" height="250">
+                                <a href="{% url 'model_detail' plus.id %}">
+                                    <img src="{{ plus.image1.url }}" width="200" height="250">
+                                </a>
                             </div>
                             <div class="box-2">
                                 <p class="c">{{ plus.title }}</p>

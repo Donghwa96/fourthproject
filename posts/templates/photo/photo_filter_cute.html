@@ -7,7 +7,9 @@
                 {% for cutes in photo_cute_posts %}
                         <div class="card">
                             <div class="box-1">
+                                <a href="{% url 'photo_detail' cutes.id %}">
                                 <img src="{{ cutes.image1.url  }}" width="200" height="250" alt = "{{ cutes.title }}">
+                                </a>
                             </div>
                             <div class="box-2">
                                 <p class="c">{{ cutes.title }}</p>

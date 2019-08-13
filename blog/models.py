@@ -12,6 +12,7 @@ class Post(models.Model):
     post_hit = models.PositiveIntegerField(default=0)
 
 
+
     class Meta:
         ordering = ['-id']
 

@@ -1,0 +1,15 @@
+dj-database-url==0.5.0
+Django==2.2.4
+django-appconf==1.0.3
+django-betterforms==1.2
+django-ckeditor==5.7.1
+django-crispy-forms==1.7.2
+django-imagekit==4.0.2
+django-js-asset==1.2.2
+pilkit==2.0
+Pillow==6.1.0
+python-dateutil==2.8.0
+pytz==2019.2
+six==1.12.0
+sqlparse==0.3.0
+urllib3==1.25.3
